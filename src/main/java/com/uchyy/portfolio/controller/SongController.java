@@ -18,42 +18,44 @@ public class SongController {
         this.songService = songService;
     }
 
-    // Get all songs or filter by title and genre
+    // Public: Get published songs, with optional filtering
     @GetMapping
-    public List<Song> getSongs(
+    public List<Song> getPublishedSongs(
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String genre) {
 
-        return songService.getSongs(title, genre);
+        return songService.getPublishedSongs(title, genre);
     }
 
-    // Get one song by ID
+    // Public: Get one published song
     @GetMapping("/{id}")
-    public Song getSongById(@PathVariable String id) {
-        return songService.getSongById(id);
+    public Song getPublishedSongById(@PathVariable String id) {
+        return songService.getPublishedSongById(id);
     }
 
-    // Update an existing song
-    @PutMapping("/{id}")
-    public Song updateSong(@PathVariable String id,
-            @RequestBody Song song) {
-
-        return songService.updateSong(id, song);
+    // Admin: Get all songs, including unpublished
+    @GetMapping("/admin")
+    public List<Song> getAllSongs() {
+        return songService.getAllSongs();
     }
 
-    // Create a new song
+    // Admin: Create a song
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Song createSong(@RequestBody Song song) {
         return songService.createSong(song);
     }
 
-    // Delete a song
+    // Admin: Update a song
+    @PutMapping("/{id}")
+    public Song updateSong(@PathVariable String id, @RequestBody Song song) {
+        return songService.updateSong(id, song);
+    }
+
+    // Admin: Delete a song
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteSong(@PathVariable String id) {
         songService.deleteSong(id);
     }
-
-
 }

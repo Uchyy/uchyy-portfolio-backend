@@ -12,15 +12,14 @@ public class Song {
     private List<String> genre;
     private SongStatus status;
     private String artwork;
-
     private String story;
     private List<String> diary;
-
     private String lyrics;
     private List<SongMedia> media;
-
     private String externalLink;
     private String createdAt;
+    private String updatedAt;
+    private boolean published;
 
     public Song() {
     }
@@ -38,7 +37,9 @@ public class Song {
             String lyrics,
             List<SongMedia> media,
             String externalLink,
-            String createdAt
+            String createdAt,
+            String updatedAt,
+            boolean published
     ) {
         this.id = id;
         this.title = title;
@@ -53,6 +54,8 @@ public class Song {
         this.media = media;
         this.externalLink = externalLink;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.published = published;
     }
 
     public String getId() {
@@ -158,4 +161,12 @@ public class Song {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getUpdatedAt() {return  updatedAt;}
+
+    public void setUpdatedAt(String updatedAt) {this.updatedAt = updatedAt;}
+
+    public boolean isPublished() {return published; }
+
+    public void setPublished(boolean published) { this.published = published; }
 }

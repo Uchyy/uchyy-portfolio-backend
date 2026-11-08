@@ -48,7 +48,9 @@ public class SampleSong {
                                 )
                         ),
                         "https://suno.com/s/ZIUXsycA1n973YVM",
-                        "2026-10-01"
+                        "2026-10-01",
+                        "2026-10-01",
+                        true
                 ),
 
                 new Song(
@@ -75,7 +77,9 @@ public class SampleSong {
                                 )
                         ),
                         "https://suno.com/s/o8VduQLmW98oelaW",
-                        "2026-10-05"
+                        "2026-10-05",
+                        "2026-10-06",
+                        true
                 ),
 
                 new Song(
@@ -110,7 +114,9 @@ public class SampleSong {
                                 )
                         ),
                         "https://suno.com/s/0lWoiWozyltCCORG",
-                        "2026-10-08"
+                        "2026-10-08",
+                        "2026-10-08",
+                        true
                 ),
 
                 new Song(
@@ -143,10 +149,13 @@ public class SampleSong {
                                         "Instrumental",
                                         SAMPLE_AUDIO,
                                         "00:30"
+
                                 )
                         ),
                         "https://suno.com/s/tCeF5167Dmm0zN6z",
-                        "2026-10-18"
+                        "2026-10-18",
+                        "2026-10-18",
+                        true
                 )
         );
     }

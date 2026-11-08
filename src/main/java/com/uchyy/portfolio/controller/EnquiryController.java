@@ -44,9 +44,7 @@ public class EnquiryController {
     }
 
     @PutMapping("/{id}")
-    public Enquiry updateEnquiry(
-            @PathVariable String id,
-            @RequestBody Enquiry enquiry) {
+    public Enquiry updateEnquiry(@PathVariable String id, @RequestBody Enquiry enquiry) {
 
         return enquiryService.updateEnquiry(id, enquiry);
     }

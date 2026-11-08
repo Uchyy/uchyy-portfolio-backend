@@ -18,6 +18,7 @@ public class SampleEnquiry {
                         "Songwriting Collaboration",
                         "I'd love to discuss a possible songwriting collaboration.",
                         EnquiryStatus.NEW,
+                        "2026-11-01",
                         "2026-11-01"
                 ),
 
@@ -28,7 +29,8 @@ public class SampleEnquiry {
                         "Music Licensing",
                         "I'm interested in discussing licensing one of your songs.",
                         EnquiryStatus.IN_PROGRESS,
-                        "2026-11-02"
+                        "2026-11-02",
+                        "2026-11-03"
                 )
         );
     }

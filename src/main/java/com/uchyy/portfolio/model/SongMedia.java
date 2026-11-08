@@ -16,6 +16,9 @@ public class SongMedia {
         this.duration = duration;
     }
 
+    public SongMedia() {
+    }
+
 
     public String getAudioUrl() {
         return audioUrl;

@@ -1,43 +1,78 @@
 package com.uchyy.portfolio.repository;
 
-import com.uchyy.portfolio.data.SampleSong;
+import com.google.cloud.firestore.Firestore;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.uchyy.portfolio.model.Song;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Repository
 public class SongRepository {
 
-    private final List<Song> songs = new ArrayList<>(SampleSong.getSongs());
+    private final Firestore firestore;
 
-    public List<Song> findAll () {
-        return songs;
+    public SongRepository(Firestore firestore) {
+        this.firestore = firestore;
     }
 
-    public Optional<Song> findById (String id) {
-        return songs.stream().filter(enquiry -> enquiry.getId().equals(id)).findFirst();
+    private static final String COLLECTION = "songs";
+
+    public List<Song> findAll() throws ExecutionException, InterruptedException {
+
+        ApiFuture<QuerySnapshot> future = firestore.collection(COLLECTION).get();
+
+        QuerySnapshot snapshot = future.get();
+
+        return snapshot.getDocuments()
+                .stream()
+                .map(document -> document.toObject(Song.class))
+                .filter(Song::isPublished)
+                .toList();
     }
 
+    public Optional<Song> findById(String id) throws ExecutionException, InterruptedException {
 
-    public Song save(Song song) {
+        DocumentSnapshot document = firestore
+                .collection(COLLECTION)
+                .document(id)
+                .get()
+                .get();
 
-        for (int i = 0; i < songs.size(); i++) {
-
-            if (songs.get(i).getId().equals(song.getId())) {
-                songs.set(i, song);
-                return song;
-            }
+        if (!document.exists()) {
+            return Optional.empty();
         }
 
-        songs.add(song);
+        return Optional.ofNullable(document.toObject(Song.class));
+    }
+
+    public Song save(Song song) throws ExecutionException, InterruptedException {
+
+        firestore.collection(COLLECTION)
+                .document(song.getId())
+                .set(song)
+                .get();
+
         return song;
     }
 
+    public boolean deleteById(String id) throws ExecutionException, InterruptedException {
 
-    public boolean deleteById(String id) {
-        return songs.removeIf(song -> song.getId().equals(id));
+        var documentReference = firestore.collection(COLLECTION).document(id);
+
+        DocumentSnapshot document = documentReference.get().get();
+
+        if (!document.exists()) {
+            return false;
+        }
+
+        documentReference.delete().get();
+
+        return true;
     }
 }

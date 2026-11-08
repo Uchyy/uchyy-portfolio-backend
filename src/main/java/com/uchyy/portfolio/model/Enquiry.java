@@ -10,6 +10,7 @@ public class Enquiry {
     private String message;
     private EnquiryStatus status;
     private String createdAt;
+    private String updatedAt;
 
     public Enquiry() {
     }
@@ -21,7 +22,9 @@ public class Enquiry {
             String subject,
             String message,
             EnquiryStatus status,
-            String createdAt
+            String createdAt,
+            String updatedAt
+
     ) {
         this.id = id;
         this.name = name;
@@ -30,6 +33,7 @@ public class Enquiry {
         this.message = message;
         this.status = status;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getId() {
@@ -87,4 +91,8 @@ public class Enquiry {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getUpdatedAt() {return updatedAt; }
+
+    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
 }
