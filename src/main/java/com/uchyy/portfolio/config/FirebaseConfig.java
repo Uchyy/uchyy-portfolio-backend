@@ -8,17 +8,19 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
-
-
 @Configuration
 public class FirebaseConfig {
 
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
 
-        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
+        GoogleCredentials credentials =
+                GoogleCredentials.getApplicationDefault();
 
-        FirebaseOptions options = FirebaseOptions.builder().setCredentials(credentials).build();
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(credentials)
+                .setProjectId("uchyy-portfolio")
+                .build();
 
         return FirebaseApp.initializeApp(options);
     }

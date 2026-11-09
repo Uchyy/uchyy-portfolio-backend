@@ -2,6 +2,8 @@ package com.uchyy.portfolio.service;
 
 import com.uchyy.portfolio.model.Song;
 import com.uchyy.portfolio.repository.SongRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 public class SongService {
 
     private final SongRepository songRepository;
+    private static final Logger logger = LoggerFactory.getLogger(SongService.class);
 
     public SongService(SongRepository songRepository) {
         this.songRepository = songRepository;
@@ -141,6 +144,7 @@ public class SongService {
 
     // Handle database failures
     private ResponseStatusException databaseError(Exception e) {
+        logger.error("Firestore database operation failed", e);
         return new ResponseStatusException(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 "A database error occurred",

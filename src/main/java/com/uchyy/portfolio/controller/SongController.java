@@ -3,6 +3,7 @@ package com.uchyy.portfolio.controller;
 
 import com.uchyy.portfolio.model.Song;
 import com.uchyy.portfolio.service.SongService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,13 +43,13 @@ public class SongController {
     // Admin: Create a song
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Song createSong(@RequestBody Song song) {
+    public Song createSong(@Valid @RequestBody Song song) {
         return songService.createSong(song);
     }
 
     // Admin: Update a song
     @PutMapping("/{id}")
-    public Song updateSong(@PathVariable String id, @RequestBody Song song) {
+    public Song updateSong(@PathVariable String id,@Valid @RequestBody Song song) {
         return songService.updateSong(id, song);
     }
 

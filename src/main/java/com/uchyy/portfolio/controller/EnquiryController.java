@@ -3,6 +3,7 @@ package com.uchyy.portfolio.controller;
 
 import com.uchyy.portfolio.model.Enquiry;
 import com.uchyy.portfolio.service.EnquiryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,15 +37,14 @@ public class EnquiryController {
         return enquiryService.getEnquiryById(id);
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Enquiry createEnquiry(@RequestBody Enquiry enquiry) {
+    public Enquiry createEnquiry(@Valid @RequestBody Enquiry enquiry) {
         return enquiryService.createEnquiry(enquiry);
     }
 
     @PutMapping("/{id}")
-    public Enquiry updateEnquiry(@PathVariable String id, @RequestBody Enquiry enquiry) {
+    public Enquiry updateEnquiry(@PathVariable String id,@Valid @RequestBody Enquiry enquiry) {
 
         return enquiryService.updateEnquiry(id, enquiry);
     }
